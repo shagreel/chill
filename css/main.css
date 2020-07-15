@@ -40,3 +40,18 @@ h1 {
 	font-size: 1.5em;
 	min-width: 400px;
 }
+#footer {
+	margin: 200px 50px 0 0;
+}
+#footer p {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	color: white;
+	text-align: right;
+	font-size: .7em;
+	min-width: 400px;
+}
+#footer p a {
+	color: white;
+	font-weight: bold;
+}
