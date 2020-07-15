@@ -1,0 +1,98 @@
+<html>
+<head>
+    <title>Bingo!</title>
+    <script
+      src="https://code.jquery.com/jquery-3.5.0.slim.min.js"
+      integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs="
+      crossorigin="anonymous"></script>
+    <script>
+        function randomize() {
+            var used=[];
+            for(var row=1;row<=5;row++) {
+                for (var col=1;col<=5;col++) {
+                    var td = $("#"+row+""+col);
+                    td.removeClass('clicked').unbind('click');
+                    do {
+                        var rand = Math.floor((Math.random() * 15) + ((col - 1) * 15) + 1);           
+                    } while (used.includes(rand));
+                    used.push(rand);
+                    td.html(rand).click(function(){
+                        $(this).toggleClass('clicked');
+                    });
+                }
+            }
+        }
+    </script>
+    <style>
+        #bingo-table {
+            border: 1px solid black;
+            padding: 0px;
+            border-spacing: 0px;
+        }
+        #bingo-table tr {
+            margin: 0px;
+            padding: 0px;
+        }
+        #bingo-table td {
+            margin: 0px;
+            padding: 5px;
+            border: 1px solid black;
+            min-width: 3em;
+            height: 3em;
+            text-align: center;
+        }
+        .clicked {
+            background-color: #85caff;
+        }
+    </style>
+</head>
+<body>
+    <table id="bingo-table">
+        <tr>
+            <td colspan="5"><button onclick="randomize()">Choose Board</button></td>
+        </tr>
+        <tr>
+            <td>B</td>
+            <td>I</td>
+            <td>N</td>
+            <td>G</td>
+            <td>O</td>
+        </tr>
+        <tr>
+            <td id="11"></td>
+            <td id="12"></td>
+            <td id="13"></td>
+            <td id="14"></td>
+            <td id="15"></td>
+        </tr>
+        <tr>
+            <td id="21"></td>
+            <td id="22"></td>
+            <td id="23"></td>
+            <td id="24"></td>
+            <td id="25"></td>
+        </tr>
+        <tr>
+            <td id="31"></td>
+            <td id="32"></td>
+            <td class="clicked">FREE</td>
+            <td id="34"></td>
+            <td id="35"></td>
+        </tr>
+        <tr>
+            <td id="41"></td>
+            <td id="42"></td>
+            <td id="43"></td>
+            <td id="44"></td>
+            <td id="45"></td>
+        </tr>
+        <tr>
+            <td id="51"></td>
+            <td id="52"></td>
+            <td id="53"></td>
+            <td id="54"></td>
+            <td id="55"></td>
+        </tr>
+    </table>
+</body>
+</html>
