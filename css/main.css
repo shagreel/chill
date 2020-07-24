@@ -52,7 +52,7 @@ h1 {
 	font-size: .7em;
 	min-width: 400px;
 }
-#footer p a {
+a {
 	color: white;
-	font-weight: bold;
+  font-weight: 500;
 }
