@@ -30,16 +30,30 @@ h1 {
 	color: white;
 }
 #content {
-	width: 600px;
+}
+#content table {
 	margin: 600px auto 0 auto;
+	width: 600px;
+}
+#content th {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	color: white;
+	text-align: center;
+	font-size: 1.5em;
+	min-width: 400px;
+  
+}
+#content td {
+  padding: 0 1em;
+  vertical-align: top;
 }
 #content p {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 	color: white;
 	text-align: justify;
-	font-size: 1.5em;
-	min-width: 400px;
+	font-size: 1.2em;
 }
 #footer {
 	margin: 200px 50px 0 0;
