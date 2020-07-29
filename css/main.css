@@ -30,12 +30,10 @@ h1 {
 	color: white;
 }
 #content {
+	margin: 650px auto 0 auto;
+	max-width: 600px;
 }
-#content table {
-	margin: 600px auto 0 auto;
-	width: 600px;
-}
-#content th {
+#content .title {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	color: white;
@@ -43,10 +41,6 @@ h1 {
 	font-size: 1.5em;
 	min-width: 400px;
   
-}
-#content td {
-  padding: 0 1em;
-  vertical-align: top;
 }
 #content p {
 	font-family: 'Roboto', sans-serif;
