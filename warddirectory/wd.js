@@ -107,7 +107,7 @@
 				<div class="apartment-people">
 					${apartment.map(person => `
 					<div>
-						<div class="profile-picture" style="url(${person.image}) center center, background:url(${person.houseImage}) center center; background-size: cover, cover;"></div>
+						<div class="profile-picture" style="background:url(${person.image}) center center, url(${person.houseImage}) center center; background-size: cover, cover;"></div>
 						<div style="padding:0 5px">
 						<div>${person.name}</div>
 						<div>${person.phone}</div>
