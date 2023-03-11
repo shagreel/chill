@@ -1,5 +1,10 @@
 /* CSS Document */
 body {
+	margin: 0px;
+	padding: 0px;
+	background-color: #ccc2c0;
+}
+#container {
 	background: url(../images/3scoops.jpg) no-repeat center center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -8,7 +13,8 @@ body {
 	background-color: #ccc2c0;
 }
 h4 {
-	margin-top: 200px;
+	margin-top: 0;
+	padding-top: 200px;
 	font-family: "IBM Plex Sans Condensed", "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
 	font-weight: 400;
     text-align: center;
@@ -28,7 +34,6 @@ h4 {
 	text-align: center;
 	font-size: 1.5em;
 	min-width: 400px;
-  
 }
 #content p {
 	font-family: 'Roboto', sans-serif;
@@ -36,6 +41,23 @@ h4 {
 	color: white;
 	text-align: justify;
 	font-size: 1.2em;
+}
+#flavors {
+	margin: 0 auto 0 auto;
+	max-width: 600px;
+	text-align: center;
+	width: 100%;
+}
+#flavors td {
+	padding-top: 2em;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	color: white;
+	text-align: center;
+	font-size: 1.2em;
+}
+#flavors img {
+	width: 200px;
 }
 #footer {
 	margin: 200px 50px 0 0;
