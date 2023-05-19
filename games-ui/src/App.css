@@ -1,0 +1,10 @@
+.cover {
+    height: 50px;
+}
+.title {
+    font-size: 30px;
+}
+
+.borrowed {
+    text-decoration: line-through;
+}
