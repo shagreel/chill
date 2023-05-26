@@ -1,14 +1,13 @@
 import '../App.css';
 import React, { useEffect, useState } from 'react';
-import { BorrowModal } from "./borrow";
+import { InteractionModal } from "./modal";
 
-export const Game = (game, isActive, onShow, onClose) => {
+export const Game = (game, onShow) => {
     return (
         <tr>
             <td><img src={game.cover} className="cover"/></td>
             <td>
                 <div className={`"title" ${game.borrowed ? 'borrowed' : ''}`} onClick={onShow}>{game.name}</div>
-                {isActive && !game.borrowed && BorrowModal(game, onClose)}
             </td>
         </tr>
     );
@@ -16,7 +15,7 @@ export const Game = (game, isActive, onShow, onClose) => {
 
 export const List = () => {
     const [games, setGames] = useState([]);
-    const [activeIndex, setActiveIndex] = useState(null);
+    const [activeGame, setActiveGame] = useState(null);
 
     useEffect(() => {
         const getGames = async () => {
@@ -24,18 +23,18 @@ export const List = () => {
             const gamesResp = await resp.json();
             setGames(gamesResp);
         };
-
-        getGames();
+        if (games.length === 0) {
+            getGames();
+        }
     }, []);
 
     return (
         <div>
-            <table className="game">
+            {activeGame && <InteractionModal game={activeGame} onClose={() => setActiveGame(null)}/>}
+            <table className="game"><tbody>
                 {games.map(game => Game(game,
-                    activeIndex === game.name,
-                    () => setActiveIndex(game.name),
-                    () => setActiveIndex(null)))}
-            </table>
+                    () => setActiveGame(game)))}
+            </tbody></table>
         </div>
     );
 };

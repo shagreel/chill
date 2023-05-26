@@ -3,6 +3,12 @@ import { Router } from 'itty-router';
 // Create a new router
 const router = Router();
 
+const corsHeaders = {
+		'Access-Control-Allow-Origin': '*',
+		'Access-Control-Allow-Headers': '*',
+		'Access-Control-Allow-Methods': 'GET, PUT, OPTIONS',
+};
+
 router.get('/games/list', async (request, env, context) => {
 		let keys = await env.games.list();
 		console.log(keys);
@@ -12,7 +18,7 @@ router.get('/games/list', async (request, env, context) => {
 		return new Response(json, {
 				status: 200,
 				headers: {
-						"Access-Control-Allow-Origin": "*",
+						...corsHeaders,
 						"Content-type": "application/json"
 				}
 		});
@@ -45,7 +51,7 @@ router.put('/games/borrow', async (request, env, context) => {
 		return new Response(json, {
 				status: 200,
 				headers: {
-						"Access-Control-Allow-Origin": "*",
+						...corsHeaders,
 						"Content-type": "application/json"
 				}
 		});
@@ -71,7 +77,7 @@ router.put('/games/return', async (request, env, context) => {
 		return new Response(json, {
 				status: 200,
 				headers: {
-						"Access-Control-Allow-Origin": "*",
+						...corsHeaders,
 						"Content-type": "application/json"
 				}
 		});
@@ -83,7 +89,15 @@ above, therefore it's useful as a 404 (and avoids us hitting worker exceptions, 
 
 Visit any page that doesn't exist (e.g. /foobar) to see it in action.
 */
-router.all('*', () => new Response('404, not found!', { status: 404 }));
+
+export const withCorsPreflight = (request) => {
+		if (request.method.toLowerCase() === 'options') {
+				return new Response('ok', {
+						headers: corsHeaders,
+				});
+		}
+};
+router.all('*', withCorsPreflight).all('*', () => new Response('404, not found!', { status: 404 }));
 
 export default {
 	fetch: router.handle,
