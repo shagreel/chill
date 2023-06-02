@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export const InteractionModal = (props) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
     const borrowGame = async () => {
-        const response = await fetch('https://games.shagreel.workers.dev/games/borrow', {
+        await fetch('https://games.shagreel.workers.dev/games/borrow', {
             method: 'PUT',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
