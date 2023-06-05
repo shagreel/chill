@@ -4,14 +4,17 @@ import { Router } from 'itty-router';
 const router = Router();
 
 const corsHeaders = {
-		'Access-Control-Allow-Origin': '*',
-		'Access-Control-Allow-Headers': '*',
+		'Access-Control-Allow-Origin': 'https://games.chill.ws',
+		'Access-Control-Allow-Headers': 'x-cfp, content-type',
 		'Access-Control-Allow-Methods': 'GET, PUT, OPTIONS',
+		'Access-Control-Allow-Credentials': true,
 };
 
 router.get('/games/list', async (request, env, context) => {
+		if (request.headers.get('x-cfp') != env.CFP_PASSWORD) {
+				return new Response(JSON.stringify({"error": "forbidden"}), {status: 403, headers: {...corsHeaders,}});
+		}
 		let keys = await env.games.list();
-		console.log(keys);
 
 		let json = await Promise.all(keys.keys.map(key => env.games.get(key.name, { type: "json" })))
 				.then(values => JSON.stringify(values));
@@ -36,17 +39,20 @@ Example post body
 }
 */
 router.put('/games/borrow', async (request, env, context) => {
-	let content = await request.json();
-	if (content == undefined) {
-		return new Response('Please provide borrowers information.');
-	}
+		if (request.headers.get('x-cfp') != env.CFP_PASSWORD) {
+				return new Response(JSON.stringify({"error": "forbidden"}), {status: 403});
+		}
+		let content = await request.json();
+		if (content == undefined) {
+				return new Response('Please provide borrowers information.');
+		}
 
-	let game = await env.games.get(content.id, { type: "json" });
-	game.borrowed = content.borrowed;
+		let game = await env.games.get(content.id, { type: "json" });
+		game.borrowed = content.borrowed;
 
-	let json = JSON.stringify(game);
-	// Just hoping it will finish correctly async.
-	env.games.put(game.id, json);
+		let json = JSON.stringify(game);
+		// Just hoping it will finish correctly async.
+		env.games.put(game.id, json);
 
 		return new Response(json, {
 				status: 200,
@@ -62,6 +68,9 @@ Example post body
 { "id": "splendor" }
 */
 router.put('/games/return', async (request, env, context) => {
+		if (request.headers.get('x-cfp') != env.CFP_PASSWORD) {
+				return new Response(JSON.stringify({"error": "forbidden"}), {status: 403});
+		}
 		let content = await request.json();
 		if (content == undefined) {
 				return new Response('Please provide borrowers information.');

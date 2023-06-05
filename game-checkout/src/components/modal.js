@@ -1,13 +1,18 @@
 import { useState } from 'react';
+import Cookies from "js-cookie";
 
 export const InteractionModal = (props) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
     const borrowGame = async () => {
-        await fetch('https://games.shagreel.workers.dev/games/borrow', {
+        await fetch('https://api.chill.ws/games/borrow', {
             method: 'PUT',
-            headers: {'Content-type': 'application/json'},
+            credentials: 'include',
+            headers: {
+                'Content-type': 'application/json',
+                'x-cfp': Cookies.get('CFP-Auth-Key')
+            },
             body: JSON.stringify({
                 "id": props.game.id,
                 "borrowed": {
@@ -30,9 +35,12 @@ export const InteractionModal = (props) => {
     };
 
     const returnGame = async () => {
-        const response = await fetch('https://games.shagreel.workers.dev/games/return', {
+        const response = await fetch('https://api.chill.ws/games/return', {
             method: 'PUT',
-            headers: {'Content-type': 'application/json'},
+            headers: {
+                'Content-type': 'application/json',
+                'x-cfp': Cookies.get('CFP-Auth-Key'),
+            },
             body: JSON.stringify({
                 "id": props.game.id
             })

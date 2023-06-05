@@ -1,6 +1,7 @@
 import '../App.css';
 import React, { useEffect, useState } from 'react';
 import { InteractionModal } from "./modal";
+import Cookies from 'js-cookie';
 
 export const Game = (game, onShow) => {
     return (
@@ -19,7 +20,10 @@ export const List = () => {
 
     useEffect(() => {
         const getGames = async () => {
-            const resp = await fetch('https://games.shagreel.workers.dev/games/list');
+            const resp = await fetch('https://games.chill.ws/api/list',
+                {
+                    credentials: 'include'
+                });
             const gamesResp = await resp.json();
             setGames(gamesResp);
         };
