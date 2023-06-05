@@ -20,9 +20,10 @@ export const List = () => {
 
     useEffect(() => {
         const getGames = async () => {
-            const resp = await fetch('https://games.chill.ws/api/list',
+            const resp = await fetch('https://api.chill.ws/games/list',
                 {
-                    credentials: 'include'
+                    credentials: 'include',
+                    headers: {'x-cfp': Cookies.get('CFP-Auth-Key')}
                 });
             const gamesResp = await resp.json();
             setGames(gamesResp);
