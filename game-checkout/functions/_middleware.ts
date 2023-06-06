@@ -34,7 +34,7 @@ export async function onRequest(context: {
     const cookie = request.headers.get('cookie') || '';
     const cookieKeyValue = await getCookieKeyValue(env.CFP_PASSWORD);
 
-    if (true ||
+    if (
         cookie.includes(cookieKeyValue) ||
         CFP_ALLOWED_PATHS.includes(pathname) ||
         !env.CFP_PASSWORD
@@ -46,7 +46,6 @@ export async function onRequest(context: {
         // No cookie or incorrect hash in cookie. Redirect to login.
         return new Response(getTemplate({ redirectPath: pathname, withError: error === '1' }), {
             headers: {
-                ...corsHeaders,
                 "Content-type": "application/json",
             }
         });

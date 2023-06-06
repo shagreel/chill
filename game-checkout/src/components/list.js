@@ -26,7 +26,11 @@ export const List = () => {
                     headers: {'x-cfp': Cookies.get('CFP-Auth-Key')}
                 });
             const gamesResp = await resp.json();
-            setGames(gamesResp);
+            if (gamesResp.error) {
+                setGames([{"id":"error","name":"Error","cover":"https://images-na.ssl-images-amazon.com/images/I/81xiifrdO7L._AC_UL232_SR232,232_.jpg"}]);
+            } else {
+                setGames(gamesResp);
+            }
         };
         if (games.length === 0) {
             getGames();
