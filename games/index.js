@@ -1,5 +1,4 @@
 import { Router } from 'itty-router';
-import { List } from './components/list';
 
 // Create a new router
 const router = Router();

@@ -26,6 +26,7 @@ export const List = () => {
                     headers: {'x-cfp': Cookies.get('CFP-Auth-Key')}
                 });
             const gamesResp = await resp.json();
+            gamesResp.sort((a, b) => a.name.localeCompare(b.name));
             setGames(gamesResp);
         };
         if (games.length === 0) {

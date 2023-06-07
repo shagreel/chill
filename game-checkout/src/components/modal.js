@@ -70,12 +70,12 @@ export const InteractionModal = (props) => {
                 {!props.game.borrowed && (
                     <div>
                         <div className="modal-form-input">
-                            <div><label htmlFor="nameId">Name: </label></div>
+                            <div><label htmlFor="nameId">Full Name: </label></div>
                             <div><input type="text" id="nameId" onInput={e => setName(e.target.value)}/></div>
                         </div>
                         <div className="modal-form-input">
                             <div><label htmlFor="emailId">Email: </label></div>
-                            <div><input type="text" id="emailId" onInput={e => setEmail(e.target.value)}/></div>
+                            <div><input type="email" id="emailId" onInput={e => setEmail(e.target.value)}/></div>
                         </div>
                     </div>
                 )}
