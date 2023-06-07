@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 export const Game = (game, onShow) => {
     return (
         <tr>
-            <td><img src={game.cover} className="cover"/></td>
+            <td><img src={game.cover} className="cover" onClick={onShow}/></td>
             <td>
                 <div className={`title ${game.borrowed ? 'borrowed' : ''}`} onClick={onShow}>{game.name}</div>
             </td>
