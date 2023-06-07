@@ -35,7 +35,7 @@ export const InteractionModal = (props) => {
     };
 
     const returnGame = async () => {
-        const response = await fetch('https://api.chill.ws/games/return', {
+        await fetch('https://api.chill.ws/games/return', {
             method: 'PUT',
             headers: {
                 'Content-type': 'application/json',

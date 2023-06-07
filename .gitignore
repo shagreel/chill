@@ -1,1 +1,4 @@
 .idea
+wrangler.toml
+.DS_Store
+.dev.vars

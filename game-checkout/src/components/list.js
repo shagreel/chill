@@ -8,7 +8,7 @@ export const Game = (game, onShow) => {
         <tr>
             <td><img src={game.cover} className="cover"/></td>
             <td>
-                <div className={`"title" ${game.borrowed ? 'borrowed' : ''}`} onClick={onShow}>{game.name}</div>
+                <div className={`title ${game.borrowed ? 'borrowed' : ''}`} onClick={onShow}>{game.name}</div>
             </td>
         </tr>
     );
@@ -26,11 +26,7 @@ export const List = () => {
                     headers: {'x-cfp': Cookies.get('CFP-Auth-Key')}
                 });
             const gamesResp = await resp.json();
-            if (gamesResp.error) {
-                setGames([{"id":"error","name":"Error","cover":"https://images-na.ssl-images-amazon.com/images/I/81xiifrdO7L._AC_UL232_SR232,232_.jpg"}]);
-            } else {
-                setGames(gamesResp);
-            }
+            setGames(gamesResp);
         };
         if (games.length === 0) {
             getGames();
@@ -41,8 +37,8 @@ export const List = () => {
         <div>
             {activeGame && <InteractionModal game={activeGame} onClose={() => setActiveGame(null)}/>}
             <table className="game"><tbody>
-                {games.map(game => Game(game,
-                    () => setActiveGame(game)))}
+            {games.map(game => Game(game,
+                () => setActiveGame(game)))}
             </tbody></table>
         </div>
     );

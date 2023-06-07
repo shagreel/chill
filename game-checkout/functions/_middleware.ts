@@ -23,6 +23,12 @@ export async function onRequestOptions(context: {
     });
 }
 
+function isPublic(pathname) {
+    if (CFP_ALLOWED_PATHS.includes(pathname)) return true;
+    if (pathname.startsWith('/images')) return true;
+    return false;
+}
+
 export async function onRequest(context: {
     request: Request;
     next: () => Promise<Response>;
@@ -36,7 +42,7 @@ export async function onRequest(context: {
 
     if (
         cookie.includes(cookieKeyValue) ||
-        CFP_ALLOWED_PATHS.includes(pathname) ||
+        isPublic(pathname) ||
         !env.CFP_PASSWORD
     ) {
         // Correct hash in cookie, allowed path, or no password set.

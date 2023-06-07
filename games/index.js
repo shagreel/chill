@@ -1,4 +1,5 @@
 import { Router } from 'itty-router';
+import { List } from './components/list';
 
 // Create a new router
 const router = Router();
@@ -12,8 +13,9 @@ const corsHeaders = {
 
 router.get('/games/list', async (request, env, context) => {
 		if (request.headers.get('x-cfp') != env.CFP_PASSWORD) {
-				return new Response(JSON.stringify({"error": "forbidden"}), {status: 403, headers: {...corsHeaders,}});
+				return new Response(JSON.stringify([{"id":"error","name":"Error retrieving list of games","cover":"/images/error.jpg"}]), {status: 200, headers: {...corsHeaders,}});
 		}
+
 		let keys = await env.games.list();
 
 		let json = await Promise.all(keys.keys.map(key => env.games.get(key.name, { type: "json" })))
@@ -22,7 +24,7 @@ router.get('/games/list', async (request, env, context) => {
 				status: 200,
 				headers: {
 						...corsHeaders,
-						"Content-type": "application/json"
+						"Content-type": "application/json",
 				}
 		});
 });
