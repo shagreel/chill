@@ -12,7 +12,7 @@ export function getTemplate({
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Password Protected Site</title>
+      <title>Game Checkout Login</title>
       <meta name="description" content="This site is password protected.">
 
       <link rel="stylesheet" href="/pico.min.css">
